@@ -2460,7 +2460,7 @@ end
 
 if MsgText[1] == "سورس" or MsgText[1]=="السورس" then
 return [[
-• ↵ مطور السورس : [Azzam .](t.me/evvvv)
+• ↵ مطور السورس : [al-hrby](t.me/yttt8)
 • ↵ قناة السورس :[SourceJan](t.me/SourceJan)
  ♠
 ]]
