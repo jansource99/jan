@@ -97,40 +97,40 @@ end
 
 function lock_photos(msg)
 if not msg.Director then 
-return "↪ هذا الامر يخص {المدير,المنشئ,المطور} فقط  \n❕"
+return "هذا الامر يخص {المدير,المنشئ,المطور} فقط  \n"
 end
 redis:set(max.."getidstatus"..msg.chat_id_, "Simple")
-return  "↪ أهلا عزيزي "..msg.TheRankCmd.."\n↪ تم تعطيل الايدي بالصوره  \n✓" 
+return  "أهلا عزيزي "..msg.TheRankCmd.."تم تعطيل الايدي بالصوره" 
 end 
 function unlock_photos(msg)
 if not msg.Director then
-return "↪ هذا الامر يخص {المدير,المنشئ,المطور} فقط  \n❕"
+return "↪ هذا الامر يخص {المدير,المنشئ,المطور} فقط  \n"
 end
 redis:set(max.."getidstatus"..msg.chat_id_, "Photo")
 return  "↪ أهلا عزيزي "..msg.TheRankCmd.."\n↪ تم تفعيل الايدي بالصوره \n✓" 
 end
 function cmds_on(msg)
-if not msg.Creator then return "↪ هذا الامر يخص {المنشئ,المطور} فقط  \n❕"
+if not msg.Creator then return "↪ هذا الامر يخص {المنشئ,المطور} فقط  \n"
 end
 redis:set(max..'lock:kara:'..msg.chat_id_,'on')
 return "↪ أهلا عزيزي "..msg.TheRankCmd.."\n↪ تم تعطيل الرفع في المجموعه \n✓"
 end
 function cmds_off(msg)
-if not msg.Creator then return "↪ هذا الامر يخص {المنشئ,المطور} فقط  \n❕"
+if not msg.Creator then return "↪ هذا الامر يخص {المنشئ,المطور} فقط  \n"
 end
 redis:set(max..'lock:kara:'..msg.chat_id_,'off')
 return "↪ أهلا عزيزي "..msg.TheRankCmd.."\n↪ تم تفعيل الرفع في المجموعه \n✓"
 end
 
 function lockjoin(msg)
-if not msg.Admin then return "↪ هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n❕"
+if not msg.Admin then return "↪ هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n"
 end
 redis:set(max..'lock:join:'..msg.chat_id_,true)
 return "*↪ أهلا عزيزي *"..msg.TheRankCmd.."*\n↪ تم قفل الدخول بالرابط \n✓*" 
 
 end
 function unlockjoin(msg)
-if not msg.Admin then return "↪ هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n❕"
+if not msg.Admin then return "↪ هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n"
 end
 redis:del(max..'lock:join:'..msg.chat_id_)
 return "*↪ أهلا عزيزي *"..msg.TheRankCmd.."*\n↪ تم فتح الدخول بالرابط \n✓*" 
@@ -455,9 +455,9 @@ disable_notification_ = 1},
 function(arg,data)
 if data.ID == "Ok" then
 redis:set(max..":MsgIDPin:"..msg.chat_id_,msg.reply_id)
-return sendMsg(msg.chat_id_,msg.id_,"↪أهلا عزيزي "..msg.TheRankCmd.." \n↪ تم تثبيت الرساله \n✓")
+return sendMsg(msg.chat_id_,msg.id_,"- أهلا عزيزي "..msg.TheRankCmd.."\n- تم تثبيت الرساله\n✓")
 elseif data.ID == "Error" and data.code_ == 6 then
-return sendMsg(msg.chat_id_,msg.id_,'↪ عذرا لا يمكنني التثبيت .\n↪ لست مشرف او لا املك صلاحيه التثبيت \n ❕')    
+return sendMsg(msg.chat_id_,msg.id_,'عذرا لا يمكنني التثبيت .\nلست مشرف او لا املك صلاحيه التثبيت \n')    
 end
 end,nil)
 end
@@ -473,7 +473,7 @@ local GroupID = msg.chat_id_:gsub('-100','')
 tdcli_function({ID="UnpinChannelMessage",channel_id_ = GroupID},
 function(arg,data) 
 if data.ID == "Ok" then
-return sendMsg(msg.chat_id_,msg.id_,"↪أهلا عزيزي "..msg.TheRankCmd.."  \n↪ تم الغاء تثبيت الرساله \n✓")    
+return sendMsg(msg.chat_id_,msg.id_,"أهلا عزيزي "..msg.TheRankCmd.."  \n تم الغاء تثبيت الرساله \n✓")    
 elseif data.ID == "Error" and data.code_ == 6 then
 return sendMsg(msg.chat_id_,msg.id_,'↪ عذرا لا يمكنني الغاء التثبيت .\n↪ لست مشرف او لا املك صلاحيه التثبيت \n ❕')    
 elseif data.ID == "Error" and data.code_ == 400 then
@@ -1207,7 +1207,7 @@ if redis:get(max.."getidstatus"..msg.chat_id_) == "Photo" then
         }
         ssssys = ali[math.random(#ali)]
         if not redis:get("KLISH:ID") then
-        sendPhoto(msg.chat_id_,msg.id_,data.photos_[0].sizes_[1].photo_.persistent_id_,'• 𝚄𝚂𝙴𝚁 𖥳  '..UserNameID..' .\n• 𝙼𝚂𝙶 𖥳  '..msgs..' .\n• 𝚂𝚃𝙰𝚃𝙴 𖥳  '..msg.TheRank..' .\n• 𝙸𝙳 𖥳  '..msg.sender_user_id_..' .\n• 𝗖𝗵𝗮 𖥳  @SourceJan .',dl_cb,nil)
+        sendPhoto(msg.chat_id_,msg.id_,data.photos_[0].sizes_[1].photo_.persistent_id_,'• USE 𖦹 '..UserNameID..' \n• MSG 𖦹 '..msgs..' \n• Stats 𖦹  '..msg.TheRank..' \n• iD 𖦹 '..msg.sender_user_id_..' \n• Cha 𖦹  @SourceJan ',dl_cb,nil)
         else
         Text = redis:get("KLISH:ID")
         Text = Text:gsub('IDGET',msg.sender_user_id_)
@@ -1222,7 +1222,7 @@ if redis:get(max.."getidstatus"..msg.chat_id_) == "Photo" then
         end
     else
         if not redis:get("KLISH:ID") then
-        sendMsg(msg.chat_id_,msg.id_,'•لا يمكنني عرض صورتك لانك قمت بحظر البوت او انك لاتملك صوره في بروفيلك ...!\n• 𝚄𝚂𝙴𝚁 𖥳 '..UserNameID..' .\n• 𝙼𝚂𝙶 𖥳 '..msgs..' .\n• 𝚂𝚃𝙰𝚃𝙴 𖥳 '..msg.TheRank..' .\n• 𝙸𝙳 𖥳 '..msg.sender_user_id_..' .\n• 𝗖𝗵𝗮 𖥳 @SourceJan .')
+        sendMsg(msg.chat_id_,msg.id_,'•لا يمكنني عرض صورتك لانك قمت بحظر البوت او انك لاتملك صوره في بروفيلك ...!\n• USE 𖦹 @ '..UserNameID..' \n• MSG 𖦹 '..msgs..' \n• Stats 𖦹 '..msg.TheRank..' \n• iD 𖦹 '..msg.sender_user_id_..' \n• Cha 𖦹 @SourceJan ')
         else
         Text = redis:get("KLISH:ID")
         Text = Text:gsub('IDGET',msg.sender_user_id_)
@@ -1249,7 +1249,7 @@ else
         Text = Text:gsub('User_Points',nko)
         sendMsg(msg.chat_id_,msg.id_,Flter_Markdown(Text))
         else
-        sendMsg(msg.chat_id_,msg.id_,'•الايدي بالصوره معطل \n• 𝚄𝚂𝙴𝚁 𖥳 '..UserNameID..' .\n• 𝙼𝚂𝙶 𖥳 '..msgs..' .\n• 𝚂𝚃𝙰𝚃𝙴 𖥳 '..msg.TheRank..' .\n• 𝙸𝙳 𖥳 '..msg.sender_user_id_..' .\n• 𝗖𝗵𝗮 𖥳 @SourceJan .')
+        sendMsg(msg.chat_id_,msg.id_,'•الايدي بالصوره معطل \n• USE 𖦹 '..UserNameID..' \n• MSG 𖦹 '..msgs..' \n• Stats 𖦹 '..msg.TheRank..' \n• iD 𖦹 '..msg.sender_user_id_..' \n• 𝗖𝗵𝗮 𖥳 @SourceJan')
         end
 end
 
@@ -1303,7 +1303,7 @@ end
 
 if MsgText[1] == 'مسح' and MsgText[2] == 'رسائلي'  then
 local msgs = redis:get(max..'msgs:'..msg.sender_user_id_..':'..msg.chat_id_) or 1
-if rfih == 0 then  return "↪عذرا لا يوجد رسائل لك في البوت  ❕" end
+if rfih == 0 then  return "↪عذرا لا يوجد رسائل لك في البوت  " end
 redis:del(max..'msgs:'..msg.sender_user_id_..':'..msg.chat_id_)
 return "↪تم مسح {* "..msgs.." *} من رسائلك  ♠\n✓"
 end
@@ -1441,7 +1441,7 @@ if not msg.Admin then return "↪هذا الامر يخص {الادمن,المد
 if redis:get(max..'welcome:msg'..msg.chat_id_)  then
 return Flter_Markdown(redis:get(max..'welcome:msg'..msg.chat_id_))
 else 
-return "↪أهلا عزيزي "..msg.TheRankCmd.."  \n-نورت المجموعه \n ♠" 
+return "أهلا عزيزي "..msg.TheRankCmd.."  \n-نورت المجموعه \n" 
 end 
 end
 
@@ -1463,7 +1463,7 @@ end
 
 
 if MsgText[1] == "طرد" then
-if not msg.Admin then return "↪هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n❕" end
+if not msg.Admin then return "هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n" end
 if not MsgText[2] and msg.reply_id then 
 GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="kick"})  
 return false
@@ -1480,7 +1480,7 @@ end
 
 
 if MsgText[1] == "حظر" then
-if not msg.Admin then return "↪هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n❕" end
+if not msg.Admin then return "↪هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n" end
 if not MsgText[2] and msg.reply_id then 
 GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="ban"}) 
 return false
@@ -1585,7 +1585,7 @@ end
 if msg.SudoBase then
 
 if MsgText[1] == "رفع مطور" then
-if not msg.SudoBase then return "↪هذا الامر يخص {المطور الاساسي} فقط  \n❕" end
+if not msg.SudoBase then return "هذا الامر يخص {المطور الاساسي} فقط  \n" end
 if not MsgText[2] and msg.reply_id then 
 GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="up_sudo"}) 
 return false
@@ -1834,7 +1834,7 @@ return false
 end 
 end 
 
-if MsgText[1] == "رتبتي" then return '- ** رتبتك ⇜ ❪ '..msg.TheRank..' ❫\n➖' end
+if MsgText[1] == "رتبتي" then return '- ** رتبتك ⇜ ❪ '..msg.TheRank..' ❫\n' end
 
 ----------------- استقبال الرسائل ---------------
 if MsgText[1] == "الغاء الامر ✖️" or MsgText[1] == "الغاء" then
@@ -1855,12 +1855,12 @@ max..'delrdall:'..msg.sender_user_id_,
 max..'text_sudo:witting'..msg.sender_user_id_,
 max..'addrd:'..msg.chat_id_..msg.sender_user_id_,
 max..'addrd_all:'..msg.chat_id_..msg.sender_user_id_)
-return '↪ تم آلغآء آلآمـر بنجآح \n➿'
+return ' تم آلغآء آلآمـر بنجآح \n'
 end  
 
 
 if MsgText[1] == 'اصدار السورس' or MsgText[1] == 'الاصدار' then
-return '-اصدار سورس جان  : *v'..version..'* \n➿'
+return '-اصدار سورس جان  : *v'..version..'* \n'
 end
 
 if (MsgText[1] == 'تحديث السورس' or MsgText[1] == 'تحديث السورس ') then
@@ -1936,19 +1936,19 @@ return false
 end
 
 if (MsgText[1]== "الاحصائيات " or MsgText[1]=="الاحصائيات") then
-if not msg.SudoBase then return"↪هذا الامر يخص {المطور الاساسي} فقط  \n❕" end
-return '-الاحصائيات  ♠ \n\n↪عدد المجموعات المفعله : '..redis:scard(max..'group:ids')..'\n↪عدد المشتركين في البوت : '..redis:scard(max..'users')..'\n'
+if not msg.SudoBase then return"•**هذا الامر يخص {المطور الاساسي} فقط ." end
+return '•الاحصائيات  \n\n•**عدد المجموعات المفعله : '..redis:scard(max..'group:ids')..'\n•**عدد المشتركين في البوت : '..redis:scard(max..'users')..'\n'
 end
 ---------------[End Function data] -----------------------
 if MsgText[1]=="اضف رد عام" or MsgText[1]=="اضف رد عام " then
-if not msg.SudoBase then return"↪هذا الامر يخص {المطور الاساسي} فقط  \n❕" end
+if not msg.SudoBase then return"هذا الامر يخص {المطور الاساسي} فقط  \n" end
 redis:setex(max..'addrd_all:'..msg.chat_id_..msg.sender_user_id_,300,true)
 redis:del(max..'allreplay:'..msg.chat_id_..msg.sender_user_id_)
-return "-حسننا الان ارسل كلمة الرد العام ➿\n"
+return "- حسننا الان ارسل كلمة الرد العام \n"
 end
 
 if MsgText[1]== 'مسح' and MsgText[2]== 'الردود' then
-if not msg.Director then return "↪هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n❕" end
+if not msg.Director then return "هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n" end
 local names   = redis:exists(max..'replay:'..msg.chat_id_)
 local photo   = redis:exists(max..'replay_photo:group:'..msg.chat_id_)
 local voice   = redis:exists(max..'replay_voice:group:'..msg.chat_id_)
@@ -1959,14 +1959,14 @@ local video   = redis:exists(max..'replay_video:group:'..msg.chat_id_)
 if names or photo or voice or imation or audio or sticker or video then
 redis:del(max..'replay:'..msg.chat_id_,max..'replay_photo:group:'..msg.chat_id_,max..'replay_voice:group:'..msg.chat_id_,
 max..'replay_animation:group:'..msg.chat_id_,max..'replay_audio:group:'..msg.chat_id_,max..'replay_sticker:group:'..msg.chat_id_,max..'replay_video:group:'..msg.chat_id_)
-return "✓ تم مسح كل الردود <"
+return "تم مسح كل الردود"
 else
-return '↪ لا يوجد ردود ليتم مسحها \n❕'
+return 'لا يوجد ردود ليتم مسحها \n'
 end
 end
 
 if MsgText[1]== 'مسح' and MsgText[2]== 'الردود العامه' then
-if not msg.SudoBase then return"-للمطورين فقط !  ♠" end
+if not msg.SudoBase then return"- للمطورين فقط" end
 local names   = redis:exists(max..'replay:all')
 local photo   = redis:exists(max..'replay_photo:group:')
 local voice   = redis:exists(max..'replay_voice:group:')
@@ -1976,20 +1976,20 @@ local sticker   = redis:exists(max..'replay_sticker:group:')
 local video   = redis:exists(max..'replay_video:group:')
 if names or photo or voice or imation or audio or sticker or video then
 redis:del(max..'replay:all',max..'replay_photo:group:',max..'replay_voice:group:',max..'replay_animation:group:',max..'replay_audio:group:',max..'replay_sticker:group:',max..'replay_video:group:')
-return "✓ تم مسح كل الردود العامه- "
+return "تم مسح كل الردود العامه - "
 else
 return "لا يوجد ردود عامه ليتم مسحها ! -"
 end
 end
 
 if MsgText[1]== 'مسح' and MsgText[2]== 'رد عام' then
-if not msg.SudoBase then return"↪هذا الامر يخص {المطور الاساسي} فقط  \n❕" end
+if not msg.SudoBase then return"هذا الامر يخص {المطور الاساسي} فقط  \n" end
 redis:set(max..'delrdall:'..msg.sender_user_id_,true) 
 return "-حسننا عزيزي  \n-الان ارسل الرد لمسحها من  المجموعات "
 end
 
 if MsgText[1]== 'مسح' and MsgText[2]== 'رد' then
-if not msg.Director then return "↪هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n❕" end
+if not msg.Director then return "هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n" end
 redis:set(max..'delrd:'..msg.sender_user_id_,true)
 return "-حسننا عزيزي  \n-الان ارسل الرد لمسحها من  للمجموعه "
 end
@@ -2019,7 +2019,7 @@ return message..'\n➖➖➖'
 end
 
 if MsgText[1]== 'الردود العامه' or MsgText[1]=='الردود العامه 🗨' then
-if not msg.SudoBase then return "-للمطور فقط !  ♠" end
+if not msg.SudoBase then return "- للمطور فقط " end
 local names   = redis:hkeys(max..'replay:all')
 local photo   = redis:hkeys(max..'replay_photo:group:')
 local voice   = redis:hkeys(max..'replay_voice:group:')
@@ -2028,7 +2028,7 @@ local audio   = redis:hkeys(max..'replay_audio:group:')
 local sticker   = redis:hkeys(max..'replay_sticker:group:')
 local video   = redis:hkeys(max..'replay_video:group:')
 if #names==0 and #photo==0 and #voice==0 and #imation==0 and #audio==0 and #sticker==0 and #video==0 then 
-return '↪لا يوجد ردود مضافه حاليا \n❕' 
+return 'لا يوجد ردود مضافه حاليا \n' 
 end
 local ii = 1
 local message = '↪الردود العامه في البوت :   :\n\n'
@@ -2460,9 +2460,9 @@ end
 
 if MsgText[1] == "سورس" or MsgText[1]=="السورس" then
 return [[
-• ↵ مطور السورس : [al-hrby](t.me/yttt8)
-• ↵ قناة السورس :[SourceJan](t.me/SourceJan)
- ♠
+[Source Developer](t.me/LVVVR/)
+[Source Channel](t.me/SourceJan)
+ 
 ]]
 end
 
@@ -2710,10 +2710,10 @@ end
 if msg.text=="/start" then 
 
 if msg.SudoBase then
-local text = '-  شكراً لك لإستخدام سورس جان .\n- انت المطور الاساسي . \n—————————\n\n- يمكنك الان التحكم باوامر البوت عن طريق لوحة التحكم  .\n- فقط انقر على الامر الذي تريده .‏'
+local text = '-  شكراً لك لإستخدام سورس جان .\n- انت المطور الاساسي . \n- يمكنك الان التحكم باوامر البوت عن طريق لوحة التحكم  .\n- فقط انقر على الامر الذي تريده .‏'
 local keyboard = {
 {"ضع اسم للبوت ","ضع صوره للترحيب "},
- {"تعطيل التواصل ✖️","تفعيل التواصل 🔛"},
+ {"تعطيل التواصل","تفعيل التواصل"},
 {"تعطيل البوت خدمي","تفعيل البوت خدمي","المطورين "},
  {"المشتركين ","المجموعات ","الاحصائيات "},
  {"اضف رد عام ","الردود العامه "},
@@ -2731,14 +2731,14 @@ return send_key(msg.sender_user_id_,text,keyboard,nil,msg.id_)
 else
 redis:sadd(max..'users',msg.sender_user_id_)
 if redis:get(max..'lock_service') then 
-text = [[-اهلاً انا بـوت اسـمي []]..redis:get(max..':NameBot:')..[[] ♠
+text = [[-اهلا انا بـوت اسـمي []]..redis:get(max..':NameBot:')..[[]
 -لحماية المجموعات من البوتات
 والتوجيه‌‏ والتكرار وغيره...
 ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
  ⚖│مـعـرف الـمـطـــور ↫ ]]..SUDO_USER..[[
 ]]
 else
-text = [[- اهلاً انابـوت اسمي []]..redis:get(max..':NameBot:')..[[] ♠
+text = [[- اهلاً انابـوت اسمي []]..redis:get(max..':NameBot:')..[[] 
 -لحماية المجموعات من البوتات
 والتوجيه‌‏ والتكرار وغيره...
 ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
@@ -2784,7 +2784,7 @@ USERNAME = FlterName(data.first_name_..' '..(data.last_name_ or ""),20)
 end
 USERCAR = utf8.len(USERNAME)
 
-SendMention(msg.sender_user_id_,data.id_,msg.id_,"-تم ارسال الرساله  .\n- الى : "..USERNAME.."  ♠",39,USERCAR) 
+SendMention(msg.sender_user_id_,data.id_,msg.id_,"-تم ارسال الرساله  .\n- الى : "..USERNAME.."  ",39,USERCAR) 
 return false 
 end,nil)
 end  
@@ -2797,7 +2797,7 @@ sendMsg(msg.chat_id_,msg.id_,"-عذراً يا عزيزي لا يمكنك ارس
 return false
 end
 redis:setex(max.."USER_MSG_TWASEL"..msg.date_,43200,msg.id_)
-sendMsg(msg.chat_id_,msg.id_,"-تم ارسال رسـالتك الى المطور\n-سـأرد عليك في اقرب وقت\n• ♠معرف المطور "..SUDO_USER)
+sendMsg(msg.chat_id_,msg.id_,"-تم ارسال رسـالتك الى المطور\n-سـأرد عليك في اقرب وقت\n- معرف المطور "..SUDO_USER)
 tdcli_function({ID='GetChat',chat_id_ = SUDO_ID},function(arg,data)
 fwdMsg(SUDO_ID,msg.chat_id_,msg.id_)
 end,nil)
@@ -2812,7 +2812,7 @@ local klma = redis:get(max..'replay1'..msg.chat_id_..msg.sender_user_id_)
 if msg.text then 
 redis:hset(max..'replay:'..msg.chat_id_,klma,Flter_Markdown(msg.text))
 redis:del(max..'addrd:'..msg.chat_id_..msg.sender_user_id_)
-return sendMsg(msg.chat_id_,msg.id_,'(['..klma..'])\n  ✓ تم اضافت الرد  ♠ \n-')
+return sendMsg(msg.chat_id_,msg.id_,'(['..klma..'])\n   تم اضافت الرد   \n-')
 elseif msg.photo then 
 redis:hset(max..'replay_photo:group:'..msg.chat_id_,klma,photo_id)
 redis:del(max..'addrd:'..msg.chat_id_..msg.sender_user_id_)
@@ -3867,13 +3867,12 @@ local su = {
   "عيون ["..Bot_Name.."] .",
   }
   local bs = {
-  "امح .",
-  "امح لخدك .",
+  "تقلع .",
+  "وعع .",
   "قم قم .",
   "من زينك .",
   "يعع .",
-  "بوساتي .",
-  "اك .",
+  "زق .",
   "توكل .",
   }
   local ns = {
@@ -3955,7 +3954,7 @@ if msg.reply_id then
 sendMsg(msg.chat_id_,msg.id_,'اوك سيدي ??🍃')
 return sendMsg(msg.chat_id_,msg.reply_id,'تعال هيوو  😒 شو طالعه عينك ولسانك طويل سربوت  اشو تعال بله شنو هاذ ويهك هاذ 😳 كول بلعباس , 😅 لك #دي وتفو بعد لتندك بتاج راسك خوش حمبقلبي  👍🏿') 
 end
-elseif Text:match("^بوس(.*)$") then 
+elseif Text:match("^بوسه(.*)$") then 
 if msg.reply_id then 
 return sendMsg(msg.chat_id_,msg.reply_id,bs[math.random(#bs)])
 else
@@ -3992,7 +3991,7 @@ else
 return sendMsg(msg.chat_id_,msg.id_,"تقلع .") 
 end
 elseif Text== "تف" then return sendMsg(msg.chat_id_,msg.id_,"وجعع .")
-elseif Text== "محمد" then return sendMsg(msg.chat_id_,msg.id_,"[Mohammed .](t.me/XIIIIIIIl")
+elseif Text== "بوت" then return sendMsg(msg.chat_id_,msg.id_,"بوت فعينك")
 elseif Text== "احبنك" then return sendMsg(msg.chat_id_,msg.id_,"اعشقنك .")
 elseif Text== "اعشقك"  then return sendMsg(msg.chat_id_,msg.id_,"اموت فيك .")
 elseif Text== "وينك"  then return sendMsg(msg.chat_id_,msg.id_,"بقلبك .")
@@ -4008,8 +4007,8 @@ elseif Text== "تنزيل حمار"  then return sendMsg(msg.chat_id_,msg.id_,"-
 elseif Text== "رفع حمار"  then return sendMsg(msg.chat_id_,msg.id_,"- اهــلا عزيزي\n- تم رفع العضو إلى حمار بنجاح\n-  تم إضافته إلى قائمة الحمير 🦓\n✓️")
 elseif Text== "رفع سربوت"  then return sendMsg(msg.chat_id_,msg.id_,"- اهــلا عزيزي\n- تم رفع السربوت بنجاح\n- الان اصبح بقائمة السرابيت 🙆🏻‍♂️\n✓️")
 elseif Text== "تنزيل سربوت"  then return sendMsg(msg.chat_id_,msg.id_,"- اهــلا عزيزي\n- تم تنزيل السربوت بنجاح\n- تمت ٳزالته من قائمة السرابيت🙆🏻‍♂️\n✓️")
-elseif Text== "رفع قلبي"  then return sendMsg(msg.chat_id_,msg.id_,"- اهــلا عزيزي\n- تم رفع العضو داخل قلبك\n- تمت ترقيته بنجاح ♥️\n✓️")
-elseif Text== "تنزيل من قلبي"  then return sendMsg(msg.chat_id_,msg.id_,"- اهــلا عزيزي\n- تم تنزيل من داخل قلبك\n- تمت ازالته ♥️\n✓️")
+elseif Text== "رفع قلبي"  then return sendMsg(msg.chat_id_,msg.id_,"- اهــلا عزيزي\n- تم رفع العضو داخل قلبك\n- تمت ترقيته بنجاح ♥️\n")
+elseif Text== "تنزيل من قلبي"  then return sendMsg(msg.chat_id_,msg.id_,"- اهــلا عزيزي\n- تم تنزيل من داخل قلبك\n- تمت ازالته ♥️\n")
 elseif Text== "رفع ملك"  then return sendMsg(msg.chat_id_,msg.id_,"- اهـلا عزيزي\n- تم رفع العضو الى ملك بنجاح \n- اصبح ملك المجموعه 🤴🏻 \n✓️")
 elseif Text== "تنزيل ملك"  then return sendMsg(msg.chat_id_,msg.id_,"- اهـلا عزيزي\n- تم طرد الملك \n-لقد تم طرده وارجاعه الى رتبته السابقه 🤴🏻\n✓️")
 elseif Text== "رفع زوجتي"  then return sendMsg(msg.chat_id_,msg.id_,"- اهــلا عزيزي\n- تم رفع المزه لتصبح زوجتك بنجاح\nالان تقدرون تجيبون عيال 👩🏻‍🤝‍👨🏼\n✓️")

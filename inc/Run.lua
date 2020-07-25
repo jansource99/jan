@@ -249,36 +249,36 @@ msg.GroupActive = false
 end
 
 if msg.sender_user_id_ == SUDO_ID then 
-msg.TheRankCmd = 'المطور 👨🏻‍✈️' 
-msg.TheRank = 'مطور اساسي 👨🏻‍✈️' 
+msg.TheRankCmd = 'المطور' 
+msg.TheRank = 'مطور اساسي' 
 msg.Rank = 1
 elseif redis:sismember(max..':SUDO_BOT:',msg.sender_user_id_) then 
-msg.TheRankCmd = 'المطور 👨🏽‍💻'
-msg.TheRank = 'مطور البوت 👨🏽‍💻'
+msg.TheRankCmd = 'المطور'
+msg.TheRank = 'مطور البوت'
 msg.Rank = 2
 elseif msg.GroupActive and redis:sismember(max..':KARA_BOT:'..msg.chat_id_,msg.sender_user_id_) then 
-msg.TheRankCmd = 'المنشىء الاساسي👷🏽'
-msg.TheRank = 'المنشىء الاساسي👷🏽 '
+msg.TheRankCmd = 'المنشىء الاساسي'
+msg.TheRank = 'المنشىء الاساسي '
 msg.Rank = 3
 elseif msg.GroupActive and redis:sismember(max..':MONSHA_BOT:'..msg.chat_id_,msg.sender_user_id_) then 
-msg.TheRankCmd = 'المنشىء 👷🏽'
-msg.TheRank = 'المنشىء 👷🏽'
+msg.TheRankCmd = 'المنشىء '
+msg.TheRank = 'المنشىء '
 msg.Rank = 4
 elseif msg.GroupActive and redis:sismember(max..'owners:'..msg.chat_id_,msg.sender_user_id_) then 
-msg.TheRankCmd = 'المدير 👨🏼‍⚕️' 
-msg.TheRank = 'مدير البوت 👨🏼‍⚕️' 
+msg.TheRankCmd = 'المدير ' 
+msg.TheRank = 'مدير البوت ' 
 msg.Rank = 5
 elseif msg.GroupActive and redis:sismember(max..'admins:'..msg.chat_id_,msg.sender_user_id_) then 
-msg.TheRankCmd = 'الادمن 👨🏼‍🎓'
-msg.TheRank = 'ادمن في البوت 👨🏼‍🎓'
+msg.TheRankCmd = 'الادمن  '
+msg.TheRank = 'ادمن في البوت '
 msg.Rank = 6
 elseif msg.GroupActive and redis:sismember(max..'whitelist:'..msg.chat_id_,msg.sender_user_id_) then 
-msg.TheRank = 'عضو مميز ⭐️'
+msg.TheRank = 'عضو مميز '
 msg.Rank = 7
 elseif msg.sender_user_id_ == our_id then
 msg.Rank = 8
 else
-msg.TheRank = 'فقط عضو 🙍🏼‍♂️'
+msg.TheRank = 'فقط عضو '
 msg.Rank = 11
 end
  
@@ -514,8 +514,8 @@ mmdi = redis:hget(max..'CmD:'..msg.chat_id_,Mohammad)
 msg.text = Mohammad:gsub(Mohammad,mmdi)
 end
 end
-	if (msg.text=="تحديث" or msg.text=="we" or msg.text=="تحديث ♻️") and msg.sender_user_id_ == SUDO_ID then
-	return sendMsg(msg.chat_id_,msg.id_," 🗂┇تہ‏‏م تحديث آلمـلفآت \n✓",nil,function(arg,data)
+	if (msg.text=="تحديث" or msg.text=="we" or msg.text=="تحديث ") and msg.sender_user_id_ == SUDO_ID then
+	return sendMsg(msg.chat_id_,msg.id_,"‏‏تم تحديث الملفات \n",nil,function(arg,data)
 	Refresh_Start = true
 	end)
 	end 
@@ -537,22 +537,22 @@ end
 	redis:del('setusername'..msg.sender_user_id_)
 	mmd = redis:get(max..":SUDO_ID:")
 redis:hset(max..'username:'..tonumber(mmd),'username',msg.text)
-	send_msg(msg.chat_id_,"🙋🏻‍♂│عزيزي تم تغيير المطور الاساسي بنجاح الان ارسل reload ...🍂")
+	send_msg(msg.chat_id_,"عزيزي تم تغيير المطور الاساسي بنجاح الان ارسل reload ...")
 	end
 	if msg.text and msg.text:match('(%d+)(%d+)(%d+)(%d+)') and redis:get('setid'..msg.sender_user_id_) then
 	redis:setex('setusername'..msg.sender_user_id_,120,true)
 	redis:del('setid'..msg.sender_user_id_)
 	redis:set(max..":SUDO_ID:",msg.text)
-send_msg(msg.chat_id_,"🔗│تم تثبيت الايدي الان قم برسال معرف المطور 🍃 @UserName ...")
+send_msg(msg.chat_id_,"تم تثبيت الايدي الان قم برسال معرف المطور @UserName ...")
 	end
 	if msg.text== 'تغير المطور الاساسي' and msg.sender_user_id_ == SUDO_ID then
-    send_msg(msg.chat_id_,"🔗│عزيزي قم برسال ايدي المطور ...🍂")
+    send_msg(msg.chat_id_,"عزيزي قم برسال ايدي المطور")
 redis:setex('setid'..msg.sender_user_id_,120,true)
 end
 	
 	
 	if msg.text== 'reload' and msg.sender_user_id_ == SUDO_ID then
-	sendMsg(msg.chat_id_,msg.id_,'👷🏽| {* تــم أعـاده تشغيل البوت  *} 📡.\n\n👨🏼‍💼| { Bot is Reloaded » }👍🏿',nil,function(arg,data)
+	sendMsg(msg.chat_id_,msg.id_,'تم اعاده تشغيل البوت',nil,function(arg,data)
 	dofile("./inc/Run.lua")
 	print("Reload ~ ./inc/Run.lua")
 	end)
@@ -682,7 +682,7 @@ end
 	if redis:get(max..'group:add-100'..data.channel_.id_) then
 	local linkGroup = (redis:get(max..'linkGroup-100'..data.channel_.id_) or "")
 	local NameGroup = (redis:get(max..'group:name-100'..data.channel_.id_) or "")
-	send_msg(SUDO_ID,"📛┇قام شخص بطرد البوت من المجموعه الاتيه : \n🏷┇ألايدي : `-100"..data.channel_.id_.."`\n🗯┇الـمجموعه : "..Flter_Markdown(NameGroup).."\n\n📮┇تـم مسح كل بيانات المجموعه بنـجاح ")
+	send_msg(SUDO_ID,"قام شخص بطرد البوت من المجموعه الاتيه : \nألايدي : `-100"..data.channel_.id_.."`\nالـمجموعه : "..Flter_Markdown(NameGroup).."\n\nتـم مسح كل بيانات المجموعه بنـجاح ")
 	rem_data_group('-100'..data.channel_.id_)
 	end
 	end

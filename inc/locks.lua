@@ -3,7 +3,7 @@
 ]]
 ---------------Lock ------------------- 
 function unlock_waring(msg)
-  if not msg.Admin then return "-**هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n❕" end
+  if not msg.Admin then return "-**هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n" end
   if redis:get(max..'lock_woring'..msg.chat_id_) then 
   return "-**أهلا عزيزي "..msg.TheRankCmd.." \n-**التحذير مفعل مسبقاً \n✓" 
   else redis:set(max..'lock_woring'..msg.chat_id_,true)
@@ -12,7 +12,7 @@ function unlock_waring(msg)
   end
    
   function lock_waring(msg)
-  if not msg.Admin then return "-**هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n❕" end
+  if not msg.Admin then return "-**هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n" end
   if not redis:get(max..'lock_woring'..msg.chat_id_) then 
   return "-**أهلا عزيزي "..msg.TheRankCmd.."\n-**التحذير بالتأكيد معطل\n✓" 
   else
@@ -22,7 +22,7 @@ function unlock_waring(msg)
   end
   
   function lock_ID(msg)
-  if not msg.Admin then return "-**هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n❕" end
+  if not msg.Admin then return "-**هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n" end
   if not redis:get(max..'lock_id'..msg.chat_id_) then 
   return "-**أهلا عزيزي "..msg.TheRankCmd.."\n-**الايدي بالتأكيد معطل\n✓" 
   else
@@ -32,7 +32,7 @@ function unlock_waring(msg)
   end
   
   function unlock_ID(msg)
-  if not msg.Admin then return "-**هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n❕" end
+  if not msg.Admin then return "-**هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n" end
   if redis:get(max..'lock_id'..msg.chat_id_) then 
   return "-**أهلا عزيزي "..msg.TheRankCmd.."\n-**امر الايدي مفعل بالفعل\n✓" 
   else 
@@ -42,7 +42,7 @@ function unlock_waring(msg)
   end
   
   function unlock_Welcome(msg)
-  if not msg.Admin then return "-**هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n❕" end
+  if not msg.Admin then return "-**هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n" end
   if redis:get(max..'welcome:get'..msg.chat_id_) then 
   return "-**أهلا عزيزي "..msg.TheRankCmd.."\n-**تفعيل الترحيب مفعل مسبقاً\n✓" 
   else redis:set(max..'welcome:get'..msg.chat_id_,true)  
@@ -61,7 +61,7 @@ function unlock_waring(msg)
   end
   
   function lock_All(msg)
-  if not msg.Director then return "-**هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n❕" end
+  if not msg.Director then return "-**هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n" end
   redis:mset(
   max..'lock_username'..msg.chat_id_,true,
   max..'mute_gif'..msg.chat_id_,true,
@@ -86,7 +86,7 @@ function unlock_waring(msg)
   end
   
   function Unlock_All(msg)
-  if not msg.Director then return "-**هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n❕" end
+  if not msg.Director then return "-**هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n" end
   redis:del(
   max..'lock_username'..msg.chat_id_,
   max..'mute_gif'..msg.chat_id_,
@@ -116,7 +116,7 @@ function unlock_waring(msg)
   end
   
   function lock_Media(msg)
-  if not msg.Director then return "-**هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n❕" end
+  if not msg.Director then return "-**هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n" end
   redis:mset(
   max..'mute_gif'..msg.chat_id_,true,
   max..'mute_photo'..msg.chat_id_,true,
@@ -129,7 +129,7 @@ function unlock_waring(msg)
   end
   
   function Unlock_Media(msg)
-  if not msg.Director then return "-**هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n❕" end
+  if not msg.Director then return "-**هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n" end
   redis:del(
   max..'mute_gif'..msg.chat_id_,
   max..'mute_photo'..msg.chat_id_,
@@ -142,7 +142,7 @@ function unlock_waring(msg)
   end
   
   function tqeed_photo(msg)
-  if not msg.Director then return "-**هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n❕" end
+  if not msg.Director then return "-**هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n" end
   if redis:get(max..':tqeed_photo:'..msg.chat_id_) then
   return '-**أهلا عزيزي '..msg.TheRankCmd..'\n-**التقييد بالصور بالتأكيد تــــم قفله \n✓'
   else
@@ -153,7 +153,7 @@ function unlock_waring(msg)
   end
   
   function fktqeed_photo(msg)
-  if not msg.Director then return "-**هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n❕" end
+  if not msg.Director then return "-**هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n" end
   if not redis:get(max..':tqeed_photo:'..msg.chat_id_) then
   return '-**أهلا عزيزي '..msg.TheRankCmd..'\n-**التقييد بالصور بالتأكيد تــــم فتحه \n✓'
   else 
@@ -164,7 +164,7 @@ function unlock_waring(msg)
   
   ---------------Lock -------------------
   function tqeed_video(msg)
-  if not msg.Director then return "-**هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n❕" end
+  if not msg.Director then return "-**هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n" end
   if redis:get(max..':tqeed_video:'..msg.chat_id_) then
   return '-**أهلا عزيزي '..msg.TheRankCmd..'\n-**التقييد بالفيديو بالتأكيد تــــم قفله \n✓'
   else
@@ -175,7 +175,7 @@ function unlock_waring(msg)
   end
   
   function fktqeed_video(msg)
-  if not msg.Director then return "-**هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n❕" end
+  if not msg.Director then return "-**هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n" end
   if not redis:get(max..':tqeed_video:'..msg.chat_id_) then
   return '-**أهلا عزيزي '..msg.TheRankCmd..'\n-**التقييد بالفيديو بالتأكيد تــــم فتحه \n✓'
   else 
@@ -186,7 +186,7 @@ function unlock_waring(msg)
   
   ---------------Lock -------------------
   function tqeed_gif(msg)
-  if not msg.Director then return "-**هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n❕" end
+  if not msg.Director then return "-**هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n" end
   if redis:get(max..':tqeed_gif:'..msg.chat_id_) then
   return '-**أهلا عزيزي '..msg.TheRankCmd..'\n-**التقييد المتحركه بالتأكيد تــــم قفله \n✓'
   else
@@ -197,7 +197,7 @@ function unlock_waring(msg)
   end
   
   function fktqeed_gif(msg)
-  if not msg.Director then return "-**هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n❕" end
+  if not msg.Director then return "-**هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n" end
   if not redis:get(max..':tqeed_gif:'..msg.chat_id_) then
   return '-**أهلا عزيزي '..msg.TheRankCmd..'\n-**التقييد المتحركه بالتأكيد تــــم فتحه \n✓'
   else 
@@ -208,7 +208,7 @@ function unlock_waring(msg)
   
   ---------------Lock -------------------
   function tqeed_fwd(msg)
-  if not msg.Director then return "-**هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n❕" end
+  if not msg.Director then return "-**هذا الامر يخص {المطور,المنشئ,المدير} فقط  \n" end
   if redis:get(max..':tqeed_fwd:'..msg.chat_id_) then
   return '-**أهلا عزيزي '..msg.TheRankCmd..'\n-**التقييد بالتوجيه بالتأكيد تــــم قفله \n✓'
   else
